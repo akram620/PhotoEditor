@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
@@ -24,12 +25,14 @@ import com.burhanrashid52.ReadJSON
 class StickerBSFragment() : BottomSheetDialogFragment() {
     private var mStickerListener: StickerListener? = null
 
+    override fun getContext(): Context? {
+        return super.getContext()
+    }
 
     fun setStickerListener(stickerListener: StickerListener?) {
         mStickerListener = stickerListener
-
-
     }
+
 
     interface StickerListener {
         fun onStickerClick(bitmap: Bitmap?)
@@ -72,8 +75,20 @@ class StickerBSFragment() : BottomSheetDialogFragment() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context).inflate(R.layout.row_sticker, parent, false)
 
+            getLinks(parent.context)
 
             return ViewHolder(view)
+        }
+
+        fun getLinks(context: Context){
+            val readJSON = ReadJSON()
+            val list = readJSON.getLink(context)
+
+            for (i in 0 until list.length()) {
+                if (!stickerPathList.contains(list[i].toString())){
+                    stickerPathList.add(list[i].toString())
+                }
+            }
         }
 
 
@@ -115,11 +130,7 @@ class StickerBSFragment() : BottomSheetDialogFragment() {
 
     companion object {
         // Image Urls from flaticon(https://www.flaticon.com/stickers-pack/food-289)
-        private val stickerPathList = mutableListOf(
-
-                "https://cdn-icons.flaticon.com/png/512/3137/premium/3137044.png?token=exp=1654290157~hmac=fd4c3d9ea104157954f325d978400712",
-                "https://cdn-icons-png.flaticon.com/512/3089/3089803.png",
-                "https://cdn-icons.flaticon.com/png/512/2544/premium/2544087.png?token=exp=1654290238~hmac=d6fa50f99278d3a54bc48e50890aad19",
+        private var stickerPathList = mutableListOf(
                 "https://cdn-icons-png.flaticon.com/256/4392/4392452.png",
                 "https://cdn-icons-png.flaticon.com/256/4392/4392455.png",
                 "https://cdn-icons-png.flaticon.com/256/4392/4392459.png",

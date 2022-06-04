@@ -61,12 +61,16 @@ class EditingToolsAdapter(private val mOnItemSelected: OnItemSelected, val conte
         }
     }
 
+    private fun namesFun(index: Int): String{
+        return readJSON.getNames(context)[index].toString()
+    }
+
     init {
-        mToolList.add(ToolModel(readJSON.getNames(context)[0].toString(), R.drawable.ic_oval, ToolType.SHAPE))
-        mToolList.add(ToolModel(readJSON.getNames(context)[1].toString(), R.drawable.ic_text, ToolType.TEXT))
-        mToolList.add(ToolModel(readJSON.getNames(context)[2].toString(), R.drawable.ic_eraser, ToolType.ERASER))
-        mToolList.add(ToolModel(readJSON.getNames(context)[3].toString(), R.drawable.ic_photo_filter, ToolType.FILTER))
-        mToolList.add(ToolModel(readJSON.getNames(context)[4].toString(), R.drawable.ic_insert_emoticon, ToolType.EMOJI))
-        mToolList.add(ToolModel(readJSON.getNames(context)[5].toString(), R.drawable.ic_sticker, ToolType.STICKER))
+        mToolList.add(ToolModel(namesFun(0), R.drawable.ic_oval, ToolType.SHAPE))
+        mToolList.add(ToolModel(namesFun(1), R.drawable.ic_text, ToolType.TEXT))
+        mToolList.add(ToolModel(namesFun(2), R.drawable.ic_eraser, ToolType.ERASER))
+        mToolList.add(ToolModel(namesFun(3), R.drawable.ic_photo_filter, ToolType.FILTER))
+        mToolList.add(ToolModel(namesFun(4), R.drawable.ic_insert_emoticon, ToolType.EMOJI))
+        mToolList.add(ToolModel(namesFun(5), R.drawable.ic_sticker, ToolType.STICKER))
     }
 }

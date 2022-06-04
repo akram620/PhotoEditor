@@ -2,6 +2,7 @@ package com.burhanrashid52.photoediting
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -73,7 +74,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
     private val mConstraintSet = ConstraintSet()
     private var mIsFilterVisible = false
 
-    var readJSON = ReadJSON()
+    private var readJSON = ReadJSON()
 
     @VisibleForTesting
     var mSaveImageUri: Uri? = null
@@ -106,7 +107,7 @@ class EditImageActivity : BaseActivity(), OnPhotoEditorListener, View.OnClickLis
         mRvFilters?.layoutManager = llmFilters
         mRvFilters?.adapter = mFilterViewAdapter
 
-        // set backround color
+        // set background color
         mRvTools?.setBackgroundColor(Color.parseColor(readJSON.getColor(this)))
 
 
